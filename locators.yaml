@@ -1,0 +1,2 @@
+xpath:
+  LOCATOR_LOGIN: //a[@data-qa='login']

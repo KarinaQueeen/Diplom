@@ -3,8 +3,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import logging
 import yaml
-
-
 class TestSearchLocators:
     """
     Хранит данные о локаторах для поиска тестируемых элементов в виде коллекции словаря
@@ -14,20 +12,12 @@ class TestSearchLocators:
         locators = yaml.safe_load(f)
     for locator in locators["xpath"].keys():
         ids[locator] = (By.XPATH, locators["xpath"][locator])
-
-
-#    for locator in locators["css"].keys():
-#        ids[locator] = (By.CSS_SELECTOR, locators["css"][locator])
-
 class OperationsHelper(BasePage):
     """
     Реализует вспомогательные методы для поиска и взаимодействия с элементами веб страницы
     """
     with open("config.yaml", encoding="utf-8") as f:
         testdata = yaml.safe_load(f)
-
-
-
     def enter_text_info_field(self, locator, word, description=None):
         """
         Вводит строку текста в поле найденному по локатору
@@ -51,7 +41,6 @@ class OperationsHelper(BasePage):
         except:
             logging.exception(f"Exception while operation with {element_name}")
             return True
-
     def click_button(self, locator, description=None):
         """
         Кликает по элементу найденному по локатору
@@ -72,7 +61,6 @@ class OperationsHelper(BasePage):
             logging.exception("Exception witch click")
         logging.debug(f"Click to element {element_name} button")
         return True
-
     def get_text_from_element(self, locator, description=None):
         """
         Получает хранящийся в элементе текст
@@ -94,7 +82,6 @@ class OperationsHelper(BasePage):
             return None
         logging.debug(f"Find text {text} in field {element_name}")
         return text
-
     def get_attribute_from_element(self, locator, attribute, description=None):
         """
         Получает значение атрибута элемента
@@ -118,7 +105,7 @@ class OperationsHelper(BasePage):
         logging.debug(f"Find attribute {attribute} in field {element_name}")
         return attr
 
-    # ENTER TEXT
+    # ENTER TEXT!!!!
     def enter_city(self, city):
         """
         Вводит название города в поле ввода
@@ -127,19 +114,50 @@ class OperationsHelper(BasePage):
         self.enter_text_info_field(TestSearchLocators.ids["LOCATOR_INPUT_CITY"], city, description="INPUT_LOGIN")
 
     # CLICK
-
     def click_login(self):
         """
-        Кликает по кнопке для входа
+        Кликает по кнопке 'Войти'
         """
         self.click_button(TestSearchLocators.ids['LOCATOR_LOGIN'],
                           description="click_login")
-    #
+    def click_news(self):
+        """
+        Кликает по блоку 'Новости'
+        """
+        self.click_button(TestSearchLocators.ids['LOCATOR_NEWS'],
+                          description="click_news")
+    def click_articles(self):
+        """
+        Кликает по блоку 'Статьи'
+        """
+        self.click_button(TestSearchLocators.ids['LOCATOR_ARTICLES'],
+                          description="click_articles")
+
     # GET TEXT
     def get_login_text(self):
         """
-        Возвращает название кнопки для регистрации
+        Возвращает название кнопки 'Войти'
         """
         return self.get_text_from_element(TestSearchLocators.ids["LOCATOR_LOGIN"], description="login")
+    def get_news_text(self):
+        """
+        Возвращает название блока 'Новости'
+        """
+        return self.get_text_from_element(TestSearchLocators.ids["LOCATOR_NEWS"], description="news")
+    def get_news_feed_text(self):
+        """
+        Возвращает название новостной ленты
+        """
+        return self.get_text_from_element(TestSearchLocators.ids["LOCATOR_NEWS_FEED"], description="news_feed")
+    def get_articles_text(self):
+        """
+        Возвращает название блока 'Статьи'
+        """
+        return self.get_text_from_element(TestSearchLocators.ids["LOCATOR_ARTICTES"], description="articles")
+    def get_blog_text(self):
+        """
+        Возвращает название Блога
+        """
+        return self.get_text_from_element(TestSearchLocators.ids["LOCATOR_BLOG"], description="blog")
 
 

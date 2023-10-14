@@ -1,2 +1,6 @@
 xpath:
   LOCATOR_LOGIN: //a[@data-qa='login']
+  LOCATOR_NEWS: //a[@data-page-analytics-event='news_list.newsHeader']
+  LOCATOR_NEWS_FEED: //h1[@data-qa="bloko-header-3"]
+  LOCATOR_ARTICLES: //a[@data-page-analytics-event='article_list.articleList']
+  LOCATOR_BLOG: //h1[@data-qa='bloko-header-3']

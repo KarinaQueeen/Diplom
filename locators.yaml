@@ -1,6 +1,10 @@
 xpath:
   LOCATOR_LOGIN: //a[@data-qa='login']
   LOCATOR_NEWS: //a[@data-page-analytics-event='news_list.newsHeader']
-  LOCATOR_NEWS_FEED: //h1[@data-qa="bloko-header-3"]
+  LOCATOR_NEWS_FEED: //h1[@data-qa='bloko-header-3']
   LOCATOR_ARTICLES: //a[@data-page-analytics-event='article_list.articleList']
   LOCATOR_BLOG: //h1[@data-qa='bloko-header-3']
+  LOCATOR_ACCOUNT: //input[@data-qa='account-signup-email']
+  LOCATOR_GO: //button[@data-qa='account-signup-submit']
+  LOCATOR_ERROR_LOGIN: //div[@data-qa='field-error-login field-error-login_BAD_LOGIN']
+  LOCATOR_BUTTON: //div[@data-qa='search-button']

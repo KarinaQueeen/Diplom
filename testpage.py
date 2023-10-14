@@ -82,6 +82,25 @@ class OperationsHelper(BasePage):
             return None
         logging.debug(f"Find text {text} in field {element_name}")
         return text
+    def get_css_property(self, locator, css, description=None):
+        """
+        Получает характеристики элемента
+        :param locator: локатор для поиска элемента
+        :css: параметр элемента
+        :param description: описание локатора
+        :return: True в случае успеха
+        """
+        if description:
+            element_name = description
+        else:
+            element_name = locator
+        try:
+            field = self.get_element_property(locator, css)
+        except:
+            logging.exception(f"Exception while get css from {element_name}")
+            return None
+        logging.debug(f"Find css {css} in field {element_name}")
+        return field
     def get_attribute_from_element(self, locator, attribute, description=None):
         """
         Получает значение атрибута элемента
@@ -105,13 +124,12 @@ class OperationsHelper(BasePage):
         logging.debug(f"Find attribute {attribute} in field {element_name}")
         return attr
 
-    # ENTER TEXT!!!!
-    def enter_city(self, city):
+    # ENTER TEXT
+    def enter_login(self, login):
         """
-        Вводит название города в поле ввода
-        :param city: название города
+        Вводит текст в поле аккаунт
         """
-        self.enter_text_info_field(TestSearchLocators.ids["LOCATOR_INPUT_CITY"], city, description="INPUT_LOGIN")
+        self.enter_text_info_field(TestSearchLocators.ids["LOCATOR_ACCOUNT"], login, description="enter_login")
 
     # CLICK
     def click_login(self):
@@ -122,42 +140,61 @@ class OperationsHelper(BasePage):
                           description="click_login")
     def click_news(self):
         """
-        Кликает по блоку 'Новости'
+        Кликает по ссылке 'Новости'
         """
         self.click_button(TestSearchLocators.ids['LOCATOR_NEWS'],
                           description="click_news")
     def click_articles(self):
         """
-        Кликает по блоку 'Статьи'
+        Кликает по ссылке 'Статьи'
         """
         self.click_button(TestSearchLocators.ids['LOCATOR_ARTICLES'],
                           description="click_articles")
+
+    def click_go(self):
+        """
+        Кликает по кнопке 'Продолжить'
+        """
+        self.click_button(TestSearchLocators.ids['LOCATOR_GO'],
+                          description="click_go")
 
     # GET TEXT
     def get_login_text(self):
         """
         Возвращает название кнопки 'Войти'
         """
-        return self.get_text_from_element(TestSearchLocators.ids["LOCATOR_LOGIN"], description="login")
+        return self.get_text_from_element(TestSearchLocators.ids["LOCATOR_LOGIN"], description="get_login_text")
     def get_news_text(self):
         """
-        Возвращает название блока 'Новости'
+        Возвращает название ссылки 'Новости'
         """
-        return self.get_text_from_element(TestSearchLocators.ids["LOCATOR_NEWS"], description="news")
+        return self.get_text_from_element(TestSearchLocators.ids["LOCATOR_NEWS"], description="get_news_text")
     def get_news_feed_text(self):
         """
         Возвращает название новостной ленты
         """
-        return self.get_text_from_element(TestSearchLocators.ids["LOCATOR_NEWS_FEED"], description="news_feed")
+        return self.get_text_from_element(TestSearchLocators.ids["LOCATOR_NEWS_FEED"], description="get_news_feed_text")
     def get_articles_text(self):
         """
-        Возвращает название блока 'Статьи'
+        Возвращает название ссылки 'Статьи'
         """
-        return self.get_text_from_element(TestSearchLocators.ids["LOCATOR_ARTICTES"], description="articles")
+        return self.get_text_from_element(TestSearchLocators.ids["LOCATOR_ARTICTES"], description="get_articles_text")
     def get_blog_text(self):
         """
         Возвращает название Блога
         """
-        return self.get_text_from_element(TestSearchLocators.ids["LOCATOR_BLOG"], description="blog")
+        return self.get_text_from_element(TestSearchLocators.ids["LOCATOR_BLOG"], description="get_blog_text")
+    def get_error_login(self):
+        """
+        Возвращает ошубку
+        """
+        return self.get_text_from_element(TestSearchLocators.ids["LOCATOR_ERROR_LOGIN"], description="get_error_login")
+
+    def get_color_button(self):
+        """
+        Возвращает цвет кнопки
+        """
+        return self.get_css_property(TestSearchLocators.ids["LOCATOR_BUTTON"],'background-color:', description="get_color_button")
+
 
 

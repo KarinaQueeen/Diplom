@@ -2,6 +2,8 @@ from BaseApp import BasePage
 from selenium.webdriver.common.by import By
 import logging
 import yaml
+
+
 class TestSearchLocators:
     '''
     Хранит данные о локаторах для поиска тестируемых элементов в виде коллекции словаря
@@ -11,10 +13,13 @@ class TestSearchLocators:
         locators = yaml.safe_load(f)
     for locator in locators['xpath'].keys():
         ids[locator] = (By.XPATH, locators['xpath'][locator])
+
+
 class OperationsHelper(BasePage):
     '''
     Реализует вспомогательные методы для поиска и взаимодействия с элементами веб страницы
     '''
+
     def enter_text_info_field(self, locator, word, description=None):
         '''
         Вводит текст в поле
@@ -38,6 +43,7 @@ class OperationsHelper(BasePage):
         except:
             logging.exception(f'Exception while operation with {element_name}')
             return True
+
     def click_button(self, locator, description=None):
         '''
         Кликает по элементу
@@ -58,6 +64,7 @@ class OperationsHelper(BasePage):
             logging.exception('Exception witch click')
         logging.debug(f'Click to element {element_name} button')
         return True
+
     def get_text_from_element(self, locator, description=None):
         '''
         Получает хранящийся в элементе текст
@@ -79,6 +86,7 @@ class OperationsHelper(BasePage):
             return None
         logging.debug(f'Find text {text} in field {element_name}')
         return text
+
     def get_css_property(self, locator, css, description=None):
         '''
         Получает характеристики элемента
@@ -98,42 +106,49 @@ class OperationsHelper(BasePage):
             return None
         logging.debug(f'Find css {css} in field {element_name}')
         return field
-# ENTER TEXT
+
+    # ENTER TEXT
     def enter_login(self, login):
         '''
         Вводит текст в поле 'Логин'
         '''
         self.enter_text_info_field(TestSearchLocators.ids['LOCATOR_ACCOUNT'], login, description='enter_login')
+
     def enter_work(self, work):
         '''
         Вводит текст в поле 'Вакансия'
         '''
         self.enter_text_info_field(TestSearchLocators.ids['LOCATOR_INPUT_WORK'], work, description='enter_work')
-# CLICK
+
+    # CLICK
     def click_login(self):
         '''
         Кликает по кнопке 'Войти'
         '''
         self.click_button(TestSearchLocators.ids['LOCATOR_LOGIN'],
                           description='click_login')
+
     def click_news(self):
         '''
         Кликает по ссылке 'Новости'
         '''
         self.click_button(TestSearchLocators.ids['LOCATOR_NEWS'],
                           description='click_news')
+
     def click_articles(self):
         '''
         Кликает по ссылке 'Статьи'
         '''
         self.click_button(TestSearchLocators.ids['LOCATOR_ARTICLES'],
                           description='click_articles')
+
     def click_go(self):
         '''
         Кликает по кнопке 'Продолжить'
         '''
         self.click_button(TestSearchLocators.ids['LOCATOR_GO'],
                           description='click_go')
+
     def click_work(self):
         '''
         Кликает по кнопке 'Найти работу'
@@ -141,43 +156,50 @@ class OperationsHelper(BasePage):
         self.click_button(TestSearchLocators.ids['LOCATOR_BUTTON'],
                           description='click_work')
 
-
-# GET TEXT
+    # GET TEXT
     def get_login_text(self):
         '''
         Возвращает название кнопки 'Войти'
         '''
         return self.get_text_from_element(TestSearchLocators.ids['LOCATOR_LOGIN'], description='get_login_text')
+
     def get_news_text(self):
         '''
         Возвращает название раздела 'Новости'
         '''
         return self.get_text_from_element(TestSearchLocators.ids['LOCATOR_NEWS'], description='get_news_text')
+
     def get_news_feed_text(self):
         '''
         Возвращает заголовок новостной ленты
         '''
         return self.get_text_from_element(TestSearchLocators.ids['LOCATOR_NEWS_FEED'], description='get_news_feed_text')
+
     def get_articles_text(self):
         '''
         Возвращает название раздела 'Статьи'
         '''
-        return self.get_text_from_element(TestSearchLocators.ids['LOCATOR_ARTICTES'], description='get_articles_text')
+        return self.get_text_from_element(TestSearchLocators.ids['LOCATOR_ARTICLES'], description='get_articles_text')
+
     def get_blog_text(self):
         '''
         Возвращает заголовок Блога
         '''
         return self.get_text_from_element(TestSearchLocators.ids['LOCATOR_BLOG'], description='get_blog_text')
+
     def get_error_login(self):
         '''
         Возвращает текст ошибки при неправильном вводе логина
         '''
         return self.get_text_from_element(TestSearchLocators.ids['LOCATOR_ERROR_LOGIN'], description='get_error_login')
+
     def get_color_button(self):
         '''
         Возвращает цвет кнопки 'Найти работу'
         '''
-        return self.get_css_property(TestSearchLocators.ids['LOCATOR_BUTTON'],'background-color', description='get_color_button')
+        return self.get_css_property(TestSearchLocators.ids['LOCATOR_BUTTON'], 'background-color',
+                                     description='get_color_button')
+
     def get_h1_text(self):
         '''
         Возвращает текст заголовка

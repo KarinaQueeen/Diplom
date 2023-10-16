@@ -7,4 +7,6 @@ xpath:
   LOCATOR_ACCOUNT: //input[@data-qa='account-signup-email']
   LOCATOR_GO: //button[@data-qa='account-signup-submit']
   LOCATOR_ERROR_LOGIN: //div[@data-qa='field-error-login field-error-login_BAD_LOGIN']
-  LOCATOR_BUTTON: //div[@data-qa='search-button']
+  LOCATOR_BUTTON: //button[@data-qa='search-button']
+  LOCATOR_INPUT_WORK: //input[@data-qa='search-input']
+  LOCATOR_H1: //h1
